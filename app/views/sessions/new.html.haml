@@ -1,15 +1,16 @@
 %h1 Log in
 
-= form_tag sessions_path do
-  .field
-    = label_tag :email
-    %br
-    = text_field_tag :email, params[:email]
+.session
+  = form_tag sessions_path, html: { id: 'session' } do
+    .email-field
+      = label_tag :email
+      %br
+      = text_field_tag :email, params[:email]
 
-  .field
-    = label_tag :password
-    %br
-    = password_field_tag :password
+    .password-field
+      = label_tag :password
+      %br
+      = password_field_tag :password
 
-  .submit
-    = submit_tag 'Log In'
+    .login-submit
+      = submit_tag 'Log In'
