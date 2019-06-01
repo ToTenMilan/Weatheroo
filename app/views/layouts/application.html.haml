@@ -20,6 +20,7 @@
               %span Logged in as
               %span= current_user.email
             %li= link_to 'Log Out', logout_path
+            %li= link_to 'Delete Account', user_path(current_user), method: :delete
         - else
           %ul.nav.navbar-nav.navbar-right
             %li= link_to 'Join', signup_path
