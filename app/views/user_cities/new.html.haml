@@ -1,0 +1,35 @@
+%form
+  .row
+    .col-md-10.col-md-offset-1.search-city-form
+      %h3 Find your city:
+      = form_tag user_cities_path, method: :get do
+        .name-field
+          = text_field_tag :search, params[:search]
+        .submit
+          = submit_tag 'Search'
+
+      - if @forecast
+        %h3 5 day forecast for:
+        %h3= @forecast.city_name
+        / # %p= @forecast.response
+
+        %table.table.table-striped
+          %tr
+            %th Hour and Day
+            %th Weather
+            %th Temperature
+            %th Air pressure
+            %th Air humidity
+            %th Wind speed
+
+          - @forecast.response[:list].each do |fc|
+            %tr
+              %td= fc[:dt_txt]
+              %td= fc[:weather][0][:description]
+              %td= to_celsius(fc[:main][:temp])
+              %td= fc[:main][:pressure]
+              %td= fc[:main][:humidity]
+              %td= fc[:wind][:speed]
+              / .td= fc["rain"]["3h"]
+              
+
