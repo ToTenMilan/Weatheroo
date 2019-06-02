@@ -33,4 +33,14 @@ chdir APP_ROOT do
 
   puts "\n== Restarting application server =="
   system! 'bin/rails restart'
+
+  puts "\n== creating .env file with contents to fill =="
+  system! 'touch .env'
+  system! 'echo "OPEN_WEATHER_MAP_TOKEN=<<FILL_ME_WITH_TOKEN>>" >> .env'
+
+  puts "\n== loading cities from seeds =="
+  system! 'rails data:load_cities'
+
+  puts "\n== run specs =="
+  system! 'rspec'
 end
