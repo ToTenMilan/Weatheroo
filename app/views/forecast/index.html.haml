@@ -1,0 +1,10 @@
+%h1 Welcome to Weatheroo
+
+- if current_user
+  %p Here is the forecast for authenticated users
+
+  = link_to 'Search your city', new_user_city_path, class: 'btn btn-primary search-your-city-button'
+
+  .col-md-8.col-md-offset-2
+  - current_user.user_cities.each do |user_city|
+    = link_to city_tile(user_city), user_city_path(user_city)

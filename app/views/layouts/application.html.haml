@@ -1,0 +1,37 @@
+!!! 5
+%html
+  %head
+    %title Weatheroo
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %nav.navbar.navbar-inverse
+      .container
+        .navbar-brand= link_to 'Weatheroo', root_path
+
+        - if current_user
+          %ul.nav.navbar-nav.navbar-right
+            / %li= link_to 'Gram It', new_pic_path
+            / %li= link_to 'Settings', edit_user_registration_path
+
+            %li
+              %span Logged in as
+              %span= current_user.email
+            %li= link_to 'Log Out', logout_path
+            %li= link_to 'Delete Account', user_path(current_user), method: :delete
+        - else
+          %ul.nav.navbar-nav.navbar-right
+            %li= link_to 'Join', signup_path
+            %li= link_to 'Log In', login_path
+
+
+    .container
+      - flash.each do |name, msg|
+        = content_tag :div, msg, class: 'alert alert-info'
+
+      = yield
+
+  = debug(params) if Rails.env.development?
+
