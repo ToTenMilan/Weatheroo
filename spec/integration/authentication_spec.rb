@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe "Authentication", type: :feature do
   context 'registration' do
     it 'signs me up' do
@@ -14,11 +16,11 @@ describe "Authentication", type: :feature do
     end
 
     it 'dont sign me up when I provide existing email' do
-      user = create(:user)
+      john = create(:john)
       visit '/signup'
       password = BCrypt::Password.create('password')
       within('.registration') do
-        fill_in 'Email', with: user.email
+        fill_in 'Email', with: john.email
         fill_in 'Password', with: 'irrelevant'
         fill_in 'Password confirmation', with: 'irrelevant'
       end
@@ -28,13 +30,8 @@ describe "Authentication", type: :feature do
     end
 
     it 'deletes account with success' do
-      user = create(:user)
-      visit '/login'
-      within(".session") do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
-      end
-      click_button 'Log In'
+      john = create(:john)
+      login(john)
       click_on 'Delete Account'
       expect(page).to have_content 'You have deleted your account'
       expect(User.count).to eq 0
@@ -44,11 +41,11 @@ describe "Authentication", type: :feature do
   context 'Authentication' do
     it "logs me in and out" do
       #log in
-      user = create(:user)
+      john = create(:john)
       visit '/login'
       within(".session") do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: user.password
+        fill_in 'Email', with: john.email
+        fill_in 'Password', with: john.password
       end
       click_button 'Log In'
       expect(page).to have_content 'You have logged in successfully'
@@ -60,10 +57,10 @@ describe "Authentication", type: :feature do
     end
 
     it 'do not log in with bad credentials' do
-      user = create(:user)
+      john = create(:john)
       visit '/login'
       within(".session") do
-        fill_in 'Email', with: user.email
+        fill_in 'Email', with: john.email
         fill_in 'Password', with: 'wrong'
       end
       click_button 'Log In'
