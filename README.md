@@ -1,24 +1,11 @@
-# README
+# Weatheroo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+exercise:
 
-Things you may want to cover:
+- 1. own authentication
+- 2. adding cities by users
+- 3. fetching forecasts from Open Weather Map API
 
-* Ruby version
+after cloning, run `bin/setup` from app directory. This will take time, since there are ~200000 cities to load
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Remember to put your Open Weather Map API token to `.env`.

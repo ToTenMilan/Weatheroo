@@ -1,0 +1,17 @@
+%table.table.table-striped
+  %tr
+    %th Hour and Day
+    %th Weather
+    %th Temperature
+    %th Air pressure
+    %th Air humidity
+    %th Wind speed
+
+  - @forecast.response[:list].each do |fc|
+    %tr
+      %td= fc[:dt_txt]
+      %td= fc[:weather][0][:description]
+      %td= to_celsius(fc[:main][:temp])
+      %td= fc[:main][:pressure]
+      %td= fc[:main][:humidity]
+      %td= fc[:wind][:speed]

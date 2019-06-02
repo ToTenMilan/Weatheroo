@@ -22,5 +22,8 @@ namespace :data do
         end
       end
     end
+
+    # remove 4 cities with empty name, that api contains
+    City.where(name: '').destroy_all
   end
 end
