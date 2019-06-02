@@ -2,7 +2,7 @@
   .row
     .col-md-10.col-md-offset-1.search-city-form
       %h3 Find your city:
-      = form_tag user_cities_new_path, method: :get do
+      = form_tag new_user_city_path, method: :get do
         %p.input-group
           %span.name-field
             = text_field_tag :search, params[:search], class: 'form-control'

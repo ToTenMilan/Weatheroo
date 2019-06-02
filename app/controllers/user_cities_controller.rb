@@ -14,7 +14,7 @@ class UserCitiesController < ApplicationController
     if user_city.save
       redirect_to root_url, notice: "You have added #{user_city.city.name} to you cities list"
     else
-      flash.now.alert = "Something went wrong. City not added\n#{user_city.errors.full_messages}"
+      flash.now.alert = "Something went wrong. City not added"
       render 'new'
     end
   end
